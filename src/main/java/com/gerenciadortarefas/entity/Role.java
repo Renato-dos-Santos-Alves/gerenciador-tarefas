@@ -2,6 +2,9 @@ package com.gerenciadortarefas.entity;
 
 import jakarta.persistence.*;
 import jdk.dynalink.linker.LinkerServices;
+import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import org.w3c.dom.stylesheets.LinkStyle;
 
 import java.io.Serializable;
@@ -9,6 +12,9 @@ import java.util.List;
 
 @Entity
 @Table(name="roles")
+@Data
+@Getter
+@Setter
 public class Role implements Serializable {
 
     @Id
