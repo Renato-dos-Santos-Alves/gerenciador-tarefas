@@ -21,6 +21,7 @@ public class UsuarioAutenticadoService implements UserDetailsService {
     @Autowired
     private IUsuarioRepository iUsuarioRepository;
 
+
     public UserDetails loadUserByUsername(String username){
 
         Usuario usuario = iUsuarioRepository.findByUsername(username)
@@ -28,7 +29,9 @@ public class UsuarioAutenticadoService implements UserDetailsService {
 
         List<SimpleGrantedAuthority> roles = usuario.getRoles()
                 .stream()
-                .map( role -> new SimpleGrantedAuthority(role.getNome()))
+                .map( role -> {
+                    return new SimpleGrantedAuthority(role.getNome().toString());
+                })
                 .collect(Collectors.toList());
 
         return new User(usuario.getUsername(), usuario.getPassword(), roles);

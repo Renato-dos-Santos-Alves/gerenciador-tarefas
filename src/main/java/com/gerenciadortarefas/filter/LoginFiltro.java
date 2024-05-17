@@ -36,7 +36,7 @@ public class LoginFiltro extends AbstractAuthenticationProcessingFilter {
 
         return getAuthenticationManager()
                 .authenticate(new UsernamePasswordAuthenticationToken(
-                        usuarioAutenticado.getUserName(),
+                        usuarioAutenticado.getUsername(),
                         usuarioAutenticado.getPassword(),
                         Collections.emptyList()
                 ));
