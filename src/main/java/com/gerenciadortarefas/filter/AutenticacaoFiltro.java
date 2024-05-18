@@ -14,7 +14,8 @@ import java.io.IOException;
 
 public class AutenticacaoFiltro extends GenericFilterBean {
     @Override
-    public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
+    public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain)
+            throws IOException, ServletException {
 
         Authentication authentication = AutenticacaoService.obterAutenticacao((HttpServletRequest) servletRequest);
 

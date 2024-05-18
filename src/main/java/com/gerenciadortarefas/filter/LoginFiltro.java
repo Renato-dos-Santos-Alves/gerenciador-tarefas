@@ -1,7 +1,6 @@
 package com.gerenciadortarefas.filter;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.gerenciadortarefas.entity.Usuario;
 import com.gerenciadortarefas.entity.UsuarioAutenticado;
 import com.gerenciadortarefas.service.AutenticacaoService;
 import jakarta.servlet.FilterChain;
@@ -28,7 +27,8 @@ public class LoginFiltro extends AbstractAuthenticationProcessingFilter {
 
 
     @Override
-    public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException, IOException, ServletException {
+    public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response)
+            throws AuthenticationException, IOException, ServletException {
 
         String collect = request.getReader().lines()
                 .collect(Collectors.joining(System.lineSeparator()));
@@ -48,6 +48,6 @@ public class LoginFiltro extends AbstractAuthenticationProcessingFilter {
                                             FilterChain filterChain,
                                             Authentication authentication) {
 
-        AutenticacaoService.addJWTToken(httpServletResponse, authentication.getName());
+        AutenticacaoService.addJWTToken(httpServletResponse, authentication);
     }
 }

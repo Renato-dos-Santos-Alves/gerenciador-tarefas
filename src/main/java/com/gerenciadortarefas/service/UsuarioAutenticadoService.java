@@ -21,18 +21,16 @@ public class UsuarioAutenticadoService implements UserDetailsService {
     @Autowired
     private IUsuarioRepository iUsuarioRepository;
 
-
-    public UserDetails loadUserByUsername(String username){
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
         Usuario usuario = iUsuarioRepository.findByUsername(username)
-                .orElseThrow(() -> new UsernameNotFoundException("Usuário "+ username +" não foi encontrado!"));
+                .orElseThrow(() -> new UsernameNotFoundException("Usuário "+ username + " não foi encontrado"));
 
         List<SimpleGrantedAuthority> roles = usuario.getRoles()
                 .stream()
-                .map( role -> {
-                    return new SimpleGrantedAuthority(role.getNome().toString());
-                })
-                .collect(Collectors.toList());
+                .map(role -> new SimpleGrantedAuthority(role.getNome().toString()))
+                .toList();
 
         return new User(usuario.getUsername(), usuario.getPassword(), roles);
     }

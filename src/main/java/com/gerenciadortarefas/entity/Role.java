@@ -1,12 +1,11 @@
 package com.gerenciadortarefas.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.gerenciadortarefas.permissoes.PermissaoEnum;
 import jakarta.persistence.*;
-import jdk.dynalink.linker.LinkerServices;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
-import org.w3c.dom.stylesheets.LinkStyle;
 
 import java.io.Serializable;
 import java.util.List;
@@ -27,5 +26,6 @@ public class Role implements Serializable {
     private PermissaoEnum nome;
 
     @ManyToMany(mappedBy = "roles")
+    @JsonBackReference
     private List<Usuario> usuarios;
 }
