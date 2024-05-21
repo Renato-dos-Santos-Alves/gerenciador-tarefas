@@ -1,0 +1,33 @@
+version: '3'
+
+services:
+  app:
+    build: .
+    volumes:
+    - ".:/usr/src/mymaven"
+    ports:
+    - 8080:8080
+
+  db:
+    image: 'postgres:latest'
+    ports:
+    - 15432:5432
+    environment:
+      - POSTGRES_PASSWORD=S@kasaki1123
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=gerenciador-tarefas
+    volumes:
+      - /tmp/db-data/:/var/lib/postgresql/data/
+      # - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+  
+  pgadmin:
+    image: dpage/pgadmin4
+    ports:
+      - "15433:80"
+    depends_on:
+      - db
+    volumes:
+      - /tmp/pgadmin-data/:/var/lib/pgadmin/
+    environment:
+      - PGADMIN_DEFAULT_PASSWORD=12345
+      - PGADMIN_DEFAULT_EMAIL=renatosakasaki@gmail.com
